@@ -65,6 +65,16 @@
     <div id="formOutput" class="output"></div>
   </section>
 
+  <!-- Завдання на захист -->
+<section>
+  <h2>Завдання на захист: TODO List</h2>
+
+  <input type="text" id="taskInput" placeholder="Введіть справу" />
+  <button onclick="addTask()">Додати</button>
+
+  <ul id="taskList" style="margin-top: 10px; padding-left: 0;"></ul>
+</section>
+
 <script>
   // Завдання №1
   function showFibonacci() {
@@ -122,6 +132,49 @@
     `<strong>Результат перевірки адреси:</strong><br>${result}`;
 
   return false; // щоб не перезавантажувалась сторінка
+  }
+</script>
+
+<script>
+  // Завдання на захист
+  function addTask() {
+    const input = document.getElementById("taskInput");
+    const taskText = input.value.trim();
+
+    if (taskText === "") {
+      alert("Введіть текст справи!");
+      return;
+    }
+
+    const li = document.createElement("li");
+    li.style.listStyle = "none";
+    li.style.backgroundColor = "#f3f3f3";
+    li.style.padding = "8px";
+    li.style.margin = "5px 0";
+    li.style.borderRadius = "4px";
+    li.style.display = "flex";
+    li.style.justifyContent = "space-between";
+    li.style.alignItems = "center";
+
+    li.innerHTML = `
+      <span>${taskText}</span>
+      <button onclick="deleteTask(this)" style="
+        background-color: red;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 4px;
+        cursor: pointer;
+      ">X</button>
+    `;
+
+    document.getElementById("taskList").appendChild(li);
+    input.value = ""; // Очистити поле після додавання
+  }
+
+  function deleteTask(button) {
+    const li = button.parentElement;
+    li.remove();
   }
 </script>
 
